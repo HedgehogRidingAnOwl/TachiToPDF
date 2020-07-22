@@ -14,16 +14,23 @@ def makePdf(pdfFileName, listPages, dir):
     #cover = Image.open(str(listPages[0][0]))
     #width, height = cover.size
 
-    pdf = FPDF()
-
+    pdf = FPDF('P', 'mm', (180,270))
+    pdf.set_margins(0,0,0)
+    
     for chapter in listPages:
         for page in chapter:
             #print (str(page))
             pdf.add_page()
             im = Image.open(page)
-            print("width: ", im.width)
-            print("height: ", im.height)
-            pdf.image(str(page), w=im.width, h=im.height)
+            ratio = im.width / im.height
+            if ratio < 1:
+                width = 180
+                height = 270/ratio
+            else:
+                width = 180*ratio
+                height = 270
+            print(width, height)
+            pdf.image(str(page), w=width, h=height)
 
     pdf.output(dir + pdfFileName, "F")
 
