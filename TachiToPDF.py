@@ -14,23 +14,27 @@ def makePdf(pdfFileName, listPages, dir):
     #cover = Image.open(str(listPages[0][0]))
     #width, height = cover.size
 
-    pdf = FPDF('P', 'mm', (180,270))
+    #pdf = FPDF('P', 'mm', (180,270))
+    pdf = FPDF('P', 'mm', (210,297))
     pdf.set_margins(0,0,0)
     
     for chapter in listPages:
         for page in chapter:
             #print (str(page))
             pdf.add_page()
+
+            # Code for attempting to fit page to the screen while keeping ratios. Kept breaking height 
+            """
             im = Image.open(page)
             ratio = im.width / im.height
-            if ratio < 1:
-                width = 180
-                height = 270/ratio
+            if ratio > 1:
+                width = 210
+                height = 297/ratio
             else:
-                width = 180*ratio
-                height = 270
-            print(width, height)
-            pdf.image(str(page), w=width, h=height)
+                width = 210*ratio
+                height = 297
+            """                
+            pdf.image(str(page), w=210, h=297)
 
     pdf.output(dir + pdfFileName, "F")
 
