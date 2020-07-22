@@ -1,3 +1,7 @@
+"""
+Few lines of python for taking the files downloaded and stored by Tachiyomi on Android and converting them into a single PDF.  
+"""
+
 from fpdf import FPDF   # PDF Building
 from PIL import Image
 import sys, getopt      # Command Line Opts
@@ -23,7 +27,7 @@ def makePdf(pdfFileName, listPages, dir):
             #print (str(page))
             pdf.add_page()
 
-            # Code for attempting to fit page to the screen while keeping ratios. Kept breaking height 
+            # Code for attempting to fit manga page to the pdf page size while keeping ratios. Kept breaking height 
             """
             im = Image.open(page)
             ratio = im.width / im.height
@@ -69,7 +73,7 @@ def sortChapters(chapters):
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "ho:d:c:ev", ["help", "output=", "dir=", "cover=", "extras"])
+        opts, _ = getopt.getopt(sys.argv[1:], "ho:d:c:ev", ["help", "output=", "dir=", "cover=", "extras"])
     except getopt.GetoptError:
         print ('test.py -i <inputfile> -o <outputfile>')
         sys.exit(2)
