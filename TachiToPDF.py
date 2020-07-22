@@ -21,6 +21,7 @@ def makePdf(pdfFileName, listPages, dir):
     #pdf = FPDF('P', 'mm', (180,270))
     pdf = FPDF('P', 'mm', (210,297))
     pdf.set_margins(0,0,0)
+    pdf.set_auto_page_break(False)
     
     for chapter in listPages:
         for page in chapter:
